@@ -16,6 +16,7 @@ class PermissionsSeeder extends Seeder
         $this->call([
             UsersModulePermissionsSeeder::class,
             RolesModulePermissionsSeeder::class,
+            CompaniesModulePermissionsSeeder::class,
         ]);
     }
 }

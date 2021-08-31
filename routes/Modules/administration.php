@@ -14,4 +14,12 @@ Route::group(['prefix' => 'administration', 'middleware' => 'auth:api'], functio
     Route::get('permissions', 'App\Http\Controllers\Administration\PermissionsController@index');
 
     Route::post('files', 'App\Http\Controllers\Administration\FilesController@store');
+
+    Route::apiResource('fiscalRoles', 'App\Http\Controllers\Administration\FiscalRolesController')->except(['store', 'update', 'destroy']);
+    Route::get('fiscalRoles/paginated/index', 'App\Http\Controllers\Administration\FiscalRolesController@paginated');
+
+    Route::apiResource('companies', 'App\Http\Controllers\Administration\CompaniesController')->except(['store', 'destroy']);
+    Route::get('companies/paginated/index', 'App\Http\Controllers\Administration\CompaniesController@paginated');
+
+
 });

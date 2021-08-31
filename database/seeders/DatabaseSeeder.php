@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
             RolesTableSeeder::class,
             UsersTableSeeder::class,
             PassportClientsSeeder::class,
+            FiscalRolesTableSeeder::class,
+            PlansTableSeeder::class,
+            CompaniesTableSeeder::class,
         ]);
     }
 }
