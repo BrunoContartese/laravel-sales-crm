@@ -14,31 +14,30 @@ class CompaniesService
 
     public function index($request)
     {
-        $entities = Company::withTrashed()
-            ->with($this->relations);
+        $companies = Company::with($this->relations);
 
-        return $entities->get();
+        return $companies->get();
     }
 
     public function paginated($request)
     {
-        $entities = Company::withTrashed()
+        $companies = Company::withTrashed()
             ->with($this->relations);
 
-        return $entities->paginate($request->page_size ?? 15);
+        return $companies->paginate($request->page_size ?? 15);
     }
 
     public function findById($id)
     {
-        return Company::withTrashed()->with($this->relations)->findOrFail($id);
+        return Company::with($this->relations)->findOrFail($id);
     }
 
     public function update($request, $id)
     {
         try {
             DB::beginTransaction();
-            $entity = Company::with($this->relations)->findOrFail($id);
-            $entity->update([
+            $company = Company::with($this->relations)->findOrFail($id);
+            $company->update([
                 'fiscal_role_id' => $request->fiscal_role_id,
                 'is_perception_agent' => $request->is_perception_agent,
                 'name' => $request->name,
@@ -50,7 +49,7 @@ class CompaniesService
                 'afip_cert_file_url' => $request->afip_cert_file_url,
             ]);
             DB::commit();
-            return $entity;
+            return $company;
         } catch (\Error $e) {
             DB::rollBack();
             Log::warning("Ha ocurrido una excepción (CompaniesService.update): {$e->getMessage()}");

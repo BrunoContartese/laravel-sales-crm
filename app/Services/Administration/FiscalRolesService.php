@@ -12,21 +12,19 @@ class FiscalRolesService
 
     public function index()
     {
-        $entities = FiscalRole::withTrashed()
-            ->with($this->relations);
-        return $entities->get();
+        $fiscalRoles = FiscalRole::with($this->relations);
+        return $fiscalRoles->get();
     }
 
     public function paginated($request)
     {
-        $entities = FiscalRole::withTrashed()
-            ->with($this->relations);
+        $fiscalRoles = FiscalRole::with($this->relations);
 
-        return $entities->paginate($request->page_size ?? 15);
+        return $fiscalRoles->paginate($request->page_size ?? 15);
     }
 
     public function findById($id)
     {
-        return FiscalRole::withTrashed()->with($this->relations)->findOrFail($id);
+        return FiscalRole::with($this->relations)->findOrFail($id);
     }
 }

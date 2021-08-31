@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             FiscalRolesTableSeeder::class,
             PlansTableSeeder::class,
             CompaniesTableSeeder::class,
+            BranchOfficesTableSeeder::class,
         ]);
     }
 }

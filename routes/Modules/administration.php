@@ -21,5 +21,9 @@ Route::group(['prefix' => 'administration', 'middleware' => 'auth:api'], functio
     Route::apiResource('companies', 'App\Http\Controllers\Administration\CompaniesController')->except(['store', 'destroy']);
     Route::get('companies/paginated/index', 'App\Http\Controllers\Administration\CompaniesController@paginated');
 
+    Route::apiResource('branchOffices', 'App\Http\Controllers\Administration\BranchOfficesController');
+    Route::get('branchOffices/paginated/index', 'App\Http\Controllers\Administration\BranchOfficesController@paginated');
+    Route::post('branchOffices/{user}/restore', 'App\Http\Controllers\Administration\BranchOfficesController@restore');
+
 
 });

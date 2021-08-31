@@ -14,7 +14,7 @@ class {{ class }}
         $entities = Model::withTrashed()
             ->with($this->relations);
 
-        if( $request->has('query') ) {
+        if( $request->has('q') ) {
             //filter rules
         }
 
@@ -30,8 +30,12 @@ class {{ class }}
         $entities = Model::withTrashed()
             ->with($this->relations);
 
-        if( $request->has('query') ) {
+        if( $request->has('q') ) {
             //filter rules
+        }
+
+        if( $request->has('orderBy') ) {
+            $users->orderBy( $request->orderBy, $request->orderType );
         }
 
         return $entities->paginate($request->page_size ?? 15);

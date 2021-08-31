@@ -17,6 +17,7 @@ class PermissionsSeeder extends Seeder
             UsersModulePermissionsSeeder::class,
             RolesModulePermissionsSeeder::class,
             CompaniesModulePermissionsSeeder::class,
+            BranchOfficesModulePermissionsSeeder::class,
         ]);
     }
 }
