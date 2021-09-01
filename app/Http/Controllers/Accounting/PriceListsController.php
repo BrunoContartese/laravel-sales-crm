@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Accounting;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Accounting\PriceLists\StorePriceListRequest;
+use App\Http\Requests\Accounting\PriceLists\UpdatePriceListRequest;
 use App\Http\Requests\Pagination\PaginatorRequest;
 use App\Services\Accounting\PriceListsService;
 use Illuminate\Http\Request;
@@ -29,7 +31,7 @@ class PriceListsController extends Controller
         return response()->json($priceLists, Response::HTTP_OK);
     }
 
-    public function store(Request $request)
+    public function store(StorePriceListRequest $request)
     {
         $priceList = $this->service->store($request);
         return response()->json($priceList, Response::HTTP_CREATED);
@@ -41,7 +43,7 @@ class PriceListsController extends Controller
         return response()->json($priceList, Response::HTTP_OK);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdatePriceListRequest $request, $id)
     {
         $priceList = $this->service->update($request, $id);
         return response()->json($priceList, Response::HTTP_OK);

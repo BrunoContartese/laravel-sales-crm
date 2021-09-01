@@ -23,10 +23,18 @@ Route::group(['prefix' => 'administration', 'middleware' => 'auth:api'], functio
 
     Route::apiResource('branchOffices', 'App\Http\Controllers\Administration\BranchOfficesController');
     Route::get('branchOffices/paginated/index', 'App\Http\Controllers\Administration\BranchOfficesController@paginated');
-    Route::post('branchOffices/{user}/restore', 'App\Http\Controllers\Administration\BranchOfficesController@restore');
+    Route::post('branchOffices/{branchOffice}/restore', 'App\Http\Controllers\Administration\BranchOfficesController@restore');
 
     Route::apiResource('documentTypes', 'App\Http\Controllers\Administration\DocumentTypesController')->only(['index']);
     Route::get('documentTypes/paginated/index', 'App\Http\Controllers\Administration\DocumentTypesController@paginated');
+
+    Route::apiResource('sellers', 'App\Http\Controllers\Administration\SellersController');
+    Route::get('sellers/paginated/index', 'App\Http\Controllers\Administration\SellersController@paginated');
+    Route::post('sellers/{seller}/restore', 'App\Http\Controllers\Administration\SellersController@restore');
+
+    Route::apiResource('deliveryZones', 'App\Http\Controllers\Administration\DeliveryZonesController');
+    Route::get('deliveryZones/paginated/index', 'App\Http\Controllers\Administration\DeliveryZonesController@paginated');
+    Route::post('deliveryZones/{deliveryZone}/restore', 'App\Http\Controllers\Administration\DeliveryZonesController@restore');
 
 
 });

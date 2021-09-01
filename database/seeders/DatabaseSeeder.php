@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
             BranchOfficesTableSeeder::class,
             DocumentTypesTableSeeder::class,
             PriceListsTableSeeder::class,
+            SellersTableSeeder::class,
+            DeliveryZonesTableSeeder::class,
         ]);
     }
 }

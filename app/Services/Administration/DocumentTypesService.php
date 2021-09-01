@@ -12,7 +12,7 @@ class DocumentTypesService
 
     public function index()
     {
-        return DocumentType::with($this->relations);
+        return DocumentType::with($this->relations)->get();
     }
 
     public function paginated($request)
