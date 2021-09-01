@@ -8,19 +8,24 @@ use Illuminate\Support\Facades\Log;
 
 class BranchOfficesService
 {
-    private $relations = [];
+    private $relations = ['destroyer'];
 
     public function index($request)
     {
-        $branchOffices = BranchOffice::withTrashed()
-            ->with($this->relations);
+        $branchOffices = BranchOffice::with($this->relations);
+
+        if($request->has('status') && $request->status == '*') {
+            $branchOffices->withTrashed();
+        } else if ($request->has('status') && !$request->status) {
+            $branchOffices->trashed();
+        }
 
         if( $request->has('q') ) {
-            $branchOffices->where('name', 'like', $request->q)
+            $branchOffices->where('name', 'like', "%{$request->q}%");
         }
 
         if( $request->has('orderBy') ) {
-            $users->orderBy( $request->orderBy, $request->orderType );
+            $branchOffices->orderBy( $request->orderBy, $request->orderType );
         }
 
         return $branchOffices->get();
@@ -28,15 +33,20 @@ class BranchOfficesService
 
     public function paginated($request)
     {
-        $branchOffices = BranchOffice::withTrashed()
-            ->with($this->relations);
+        $branchOffices = BranchOffice::with($this->relations);
+
+        if($request->status == '*') {
+            $branchOffices->withTrashed();
+        } else if ($request->status != '*' && $request->status == 2) {
+            $branchOffices->onlyTrashed();
+        }
 
         if( $request->has('q') ) {
-            $branchOffices->where('name', 'like', $request->q);
+            $branchOffices->where('name', 'like', "%{$request->q}%");
         }
 
         if( $request->has('orderBy') ) {
-            $users->orderBy( $request->orderBy, $request->orderType );
+            $branchOffices->orderBy( $request->orderBy, $request->orderType );
         }
 
         return $branchOffices->paginate($request->page_size ?? 15);
@@ -67,7 +77,7 @@ class BranchOfficesService
 
     public function findById($id)
     {
-        return Model::withTrashed()->with($this->relations)->findOrFail($id);
+        return BranchOffice::withTrashed()->with($this->relations)->findOrFail($id);
     }
 
     public function update($request, $id)

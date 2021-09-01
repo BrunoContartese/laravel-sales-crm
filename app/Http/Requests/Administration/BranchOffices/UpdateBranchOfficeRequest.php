@@ -16,7 +16,7 @@ class UpdateBranchOfficeRequest extends FormRequest
     public function rules()
     {
         $rules =  BranchOffice::$rules;
-        $rules['name'] = "required|unique:branch_offices,name,{$this->route()->parameter('branchOfficeId')}";
+        $rules['name'] = "required|unique:branch_offices,name,{$this->route()->parameter('branchOffice')}";
         return $rules;
     }
 
