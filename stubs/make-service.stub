@@ -11,15 +11,20 @@ class {{ class }}
 
     public function index($request)
     {
-        $entities = Model::withTrashed()
-            ->with($this->relations);
+        $entities = Model::with($this->relations);
 
         if( $request->has('q') ) {
             //filter rules
         }
 
+        if($request->has('status') && $request->status == '*') {
+            $entities->withTrashed();
+        } else if ($request->has('status') && $request->status == 2) {
+            $entities->onlyTrashed();
+        }
+
         if( $request->has('orderBy') ) {
-            $users->orderBy( $request->orderBy, $request->orderType );
+            $entities->orderBy( $request->orderBy, $request->orderType );
         }
 
         return $entities->get();
@@ -27,15 +32,20 @@ class {{ class }}
 
     public function paginated($request)
     {
-        $entities = Model::withTrashed()
-            ->with($this->relations);
+        $entities = Model::with($this->relations);
 
         if( $request->has('q') ) {
             //filter rules
         }
 
+        if($request->has('status') && $request->status == '*') {
+            $entities->withTrashed();
+        } else if ($request->has('status') && $request->status == 2) {
+            $entities->onlyTrashed();
+        }
+
         if( $request->has('orderBy') ) {
-            $users->orderBy( $request->orderBy, $request->orderType );
+            $entities->orderBy( $request->orderBy, $request->orderType );
         }
 
         return $entities->paginate($request->page_size ?? 15);
@@ -63,7 +73,7 @@ class {{ class }}
     {
         try {
             DB::beginTransaction();
-            $entity = Model::with($this->relations)->findOrFail($id);
+            $entity = Model::withTrashed()->with($this->relations)->findOrFail($id);
             $entity->update($request->all());
             DB::commit();
             return $entity;

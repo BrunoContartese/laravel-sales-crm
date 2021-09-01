@@ -25,5 +25,8 @@ Route::group(['prefix' => 'administration', 'middleware' => 'auth:api'], functio
     Route::get('branchOffices/paginated/index', 'App\Http\Controllers\Administration\BranchOfficesController@paginated');
     Route::post('branchOffices/{user}/restore', 'App\Http\Controllers\Administration\BranchOfficesController@restore');
 
+    Route::apiResource('documentTypes', 'App\Http\Controllers\Administration\DocumentTypesController')->only(['index']);
+    Route::get('documentTypes/paginated/index', 'App\Http\Controllers\Administration\DocumentTypesController@paginated');
+
 
 });
