@@ -30,23 +30,23 @@ class CustomersService
             });
         }
 
-        if($request->has('documentType')) {
+        if($request->has('documentType') && $request->documentType != '*') {
             $customers->where('document_type_id', $request->documentType);
         }
 
-        if($request->has('fiscalRole')) {
+        if($request->has('fiscalRole') && $request->fiscalRole != '*' {
             $customers->where('fiscal_role_id', $request->fiscalRole);
         }
 
-        if($request->has('priceList')) {
+        if($request->has('priceList') && $request->priceList != '*') {
             $customers->where('price_list_id', $request->priceList);
         }
 
-        if($request->has('deliveryZone')) {
+        if($request->has('deliveryZone') && $request->deliveryZone != '*') {
             $customers->where('delivery_zone_id', $request->deliveryZone);
         }
 
-        if($request->has('seller')) {
+        if($request->has('seller') && $request->seller != '*') {
             $customers->where('seller_id', $request->seller);
         }
 
@@ -76,23 +76,23 @@ class CustomersService
             });
         }
 
-        if($request->has('documentType')) {
+        if($request->has('documentType') && $request->documentType != '*') {
             $customers->where('document_type_id', $request->documentType);
         }
 
-        if($request->has('fiscalRole')) {
+        if($request->has('fiscalRole') && $request->fiscalRole != '*' {
             $customers->where('fiscal_role_id', $request->fiscalRole);
         }
 
-        if($request->has('priceList')) {
+        if($request->has('priceList') && $request->priceList != '*') {
             $customers->where('price_list_id', $request->priceList);
         }
 
-        if($request->has('deliveryZone')) {
+        if($request->has('deliveryZone') && $request->deliveryZone != '*') {
             $customers->where('delivery_zone_id', $request->deliveryZone);
         }
 
-        if($request->has('seller')) {
+        if($request->has('seller') && $request->seller != '*') {
             $customers->where('seller_id', $request->seller);
         }
 
