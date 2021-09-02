@@ -36,5 +36,9 @@ Route::group(['prefix' => 'administration', 'middleware' => 'auth:api'], functio
     Route::get('deliveryZones/paginated/index', 'App\Http\Controllers\Administration\DeliveryZonesController@paginated');
     Route::post('deliveryZones/{deliveryZone}/restore', 'App\Http\Controllers\Administration\DeliveryZonesController@restore');
 
+    Route::apiResource('customers', 'App\Http\Controllers\Administration\CustomersController');
+    Route::get('customers/paginated/index', 'App\Http\Controllers\Administration\CustomersController@paginated');
+    Route::post('customers/{deliveryZone}/restore', 'App\Http\Controllers\Administration\CustomersController@restore');
+
 
 });

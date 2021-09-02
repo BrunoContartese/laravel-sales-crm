@@ -16,9 +16,9 @@ class CreateDeliveryZonesTable extends Migration
         Schema::create('delivery_zones', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->unsignedBigInteger('created_by')->nullable();
-            $table->unsignedBigInteger('updated_by')->nullable();
-            $table->unsignedBigInteger('deleted_by')->nullable();
+            $table->foreignId('created_by')->nullable()->references('id')->on('users')->default('null');
+            $table->foreignId('updated_by')->nullable()->references('id')->on('users')->default('null');
+            $table->foreignId('deleted_by')->nullable()->references('id')->on('users')->default('null');
             $table->softDeletes();
             $table->timestamps();
         });
