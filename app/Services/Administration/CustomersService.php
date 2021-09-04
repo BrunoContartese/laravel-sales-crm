@@ -34,7 +34,7 @@ class CustomersService
             $customers->where('document_type_id', $request->documentType);
         }
 
-        if($request->has('fiscalRole') && $request->fiscalRole != '*' {
+        if($request->has('fiscalRole') && $request->fiscalRole != '*') {
             $customers->where('fiscal_role_id', $request->fiscalRole);
         }
 
@@ -80,7 +80,7 @@ class CustomersService
             $customers->where('document_type_id', $request->documentType);
         }
 
-        if($request->has('fiscalRole') && $request->fiscalRole != '*' {
+        if($request->has('fiscalRole') && $request->fiscalRole != '*') {
             $customers->where('fiscal_role_id', $request->fiscalRole);
         }
 
@@ -121,6 +121,7 @@ class CustomersService
                 'document' => $request->document,
                 'email' => $request->email,
                 'phone_number' => $request->phone_number,
+                'cellphone_number' => $request->cellphone_number,
                 'fiscal_role_id' => $request->fiscal_role_id,
                 'price_list_id' => $request->price_list_id,
                 'delivery_zone_id' => $request->delivery_zone_id,
@@ -144,8 +145,7 @@ class CustomersService
     {
         try {
             DB::beginTransaction();
-            $customer = Customer::withTrashed()->with($this->relations)->findOrFail($id);
-            $customer->update([
+            $customer = Customer::withTrashed()->with($this->relations)->update([
                 'given_name' => $request->given_name,
                 'family_name' => $request->family_name,
                 'address' => $request->address,
@@ -153,6 +153,7 @@ class CustomersService
                 'document' => $request->document,
                 'email' => $request->email,
                 'phone_number' => $request->phone_number,
+                'cellphone_number' => $request->cellphone_number,
                 'fiscal_role_id' => $request->fiscal_role_id,
                 'price_list_id' => $request->price_list_id,
                 'delivery_zone_id' => $request->delivery_zone_id,

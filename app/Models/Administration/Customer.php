@@ -20,6 +20,7 @@ class Customer extends Model
         'document',
         'email',
         'phone_number',
+        'cellphone_number',
         'fiscal_role_id',
         'price_list_id',
         'delivery_zone_id',

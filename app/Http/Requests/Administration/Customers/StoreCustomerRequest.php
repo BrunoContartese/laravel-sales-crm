@@ -2,29 +2,26 @@
 
 namespace App\Http\Requests\Administration\Customers;
 
+use App\Models\Administration\Customer;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreCustomerRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
+
     public function authorize()
     {
-        return false;
+        return Auth::user()->can('customers.create');
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
-        return [
-            //
-        ];
+        return Customer::$rules;
     }
+
+    public function messages()
+    {
+        return Customer::$messages;
+    }
+
 }
