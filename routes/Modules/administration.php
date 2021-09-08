@@ -38,7 +38,11 @@ Route::group(['prefix' => 'administration', 'middleware' => 'auth:api'], functio
 
     Route::apiResource('customers', 'App\Http\Controllers\Administration\CustomersController');
     Route::get('customers/paginated/index', 'App\Http\Controllers\Administration\CustomersController@paginated');
-    Route::post('customers/{deliveryZone}/restore', 'App\Http\Controllers\Administration\CustomersController@restore');
+    Route::post('customers/{customer}/restore', 'App\Http\Controllers\Administration\CustomersController@restore');
+
+    Route::apiResource('productCategories', 'App\Http\Controllers\Administration\CustomersController');
+    Route::get('productCategories/paginated/index', 'App\Http\Controllers\Administration\CustomersController@paginated');
+    Route::post('productCategories/{productCategory}/restore', 'App\Http\Controllers\Administration\CustomersController@restore');
 
 
 });

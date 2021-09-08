@@ -27,6 +27,8 @@ class DatabaseSeeder extends Seeder
             SellersTableSeeder::class,
             DeliveryZonesTableSeeder::class,
             CustomersTableSeeder::class,
+            ProductCategoriesTableSeeder::class,
+            ProductsTableSeeder::class,
         ]);
     }
 }
