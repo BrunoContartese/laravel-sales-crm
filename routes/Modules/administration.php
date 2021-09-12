@@ -40,9 +40,9 @@ Route::group(['prefix' => 'administration', 'middleware' => 'auth:api'], functio
     Route::get('customers/paginated/index', 'App\Http\Controllers\Administration\CustomersController@paginated');
     Route::post('customers/{customer}/restore', 'App\Http\Controllers\Administration\CustomersController@restore');
 
-    Route::apiResource('productCategories', 'App\Http\Controllers\Administration\CustomersController');
-    Route::get('productCategories/paginated/index', 'App\Http\Controllers\Administration\CustomersController@paginated');
-    Route::post('productCategories/{productCategory}/restore', 'App\Http\Controllers\Administration\CustomersController@restore');
+    Route::apiResource('productCategories', 'App\Http\Controllers\Administration\ProductCategoriesController');
+    Route::get('productCategories/paginated/index', 'App\Http\Controllers\Administration\ProductCategoriesController@paginated');
+    Route::post('productCategories/{productCategory}/restore', 'App\Http\Controllers\Administration\ProductCategoriesController@restore');
 
 
 });

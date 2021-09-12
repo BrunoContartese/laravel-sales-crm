@@ -5,17 +5,20 @@ namespace App\Services\Administration;
 use App\Models\Administration\ProductCategory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 
 class ProductCategoriesService
 {
-    private $relations = [];
+    private $relations = [
+        'children'
+    ];
 
     public function index($request)
     {
         $productCategories = ProductCategory::with($this->relations);
 
         if( $request->has('q') ) {
-            $productCategories->where('name', 'like', "%{$request->q}%")
+            $productCategories->where('name', 'like', "%{$request->q}%");
         }
 
         if($request->has('status') && $request->status == '*') {
@@ -26,6 +29,10 @@ class ProductCategoriesService
 
         if( $request->has('orderBy') ) {
             $productCategories->orderBy( $request->orderBy, $request->orderType );
+        }
+
+        if($request->has('only_root_records')) {
+            $productCategories->whereParentId(null);
         }
 
         return $productCategories->get();
@@ -36,7 +43,7 @@ class ProductCategoriesService
         $productCategories = ProductCategory::with($this->relations);
 
         if( $request->has('q') ) {
-            $productCategories->where('name', 'like', "%{$request->q}%")
+            $productCategories->where('name', 'like', "%{$request->q}%");
         }
 
         if($request->has('status') && $request->status == '*') {
@@ -47,6 +54,10 @@ class ProductCategoriesService
 
         if( $request->has('orderBy') ) {
             $productCategories->orderBy( $request->orderBy, $request->orderType );
+        }
+
+        if($request->has('only_root_records')) {
+            $productCategories->whereParentId(null);
         }
 
         return $productCategories->paginate($request->page_size ?? 15);
@@ -78,6 +89,12 @@ class ProductCategoriesService
         try {
             DB::beginTransaction();
             $productCategory = ProductCategory::withTrashed()->with($this->relations)->findOrFail($id);
+            if($productCategory->parent_id == null && $productCategory->children()->count() > 0 &&  $request->parent_id != null) {
+                Log::info('ENTRE');
+                throw ValidationException::withMessages(['errors' => [
+                    'root_category' => 'No puede convertir en sub-categoría a una categoría principal.'
+                ]]);
+            }
             $productCategory->update([
                 'name' => $request->name,
                 'parent_id' => $request->parent_id

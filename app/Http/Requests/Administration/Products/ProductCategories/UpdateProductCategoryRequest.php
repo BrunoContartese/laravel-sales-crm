@@ -2,29 +2,26 @@
 
 namespace App\Http\Requests\Administration\Products\ProductCategories;
 
+use App\Models\Administration\ProductCategory;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateProductCategoryRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
-        return false;
+        return Auth::user()->can('productCategories.create');
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
-        return [
-            //
-        ];
+        $rules =  ProductCategory::$rules;
+        $rules['name'] = "required|unique:product_categories,name,{$this->route()->parameter('productCategory')}";
+        return $rules;
+    }
+
+    public function messages()
+    {
+        return ProductCategory::$messages;
     }
 }
