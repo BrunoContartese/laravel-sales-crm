@@ -29,6 +29,8 @@ class DatabaseSeeder extends Seeder
             CustomersTableSeeder::class,
             ProductCategoriesTableSeeder::class,
             ProductsTableSeeder::class,
+            AccountingRecordTypesTableSeeder::class,
+            SuppliersTableSeeder::class,
         ]);
     }
 }
