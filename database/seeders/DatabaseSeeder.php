@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             SuppliersTableSeeder::class,
             TributesTableSeeder::class,
             TributeAliquotsTableSeeder::class,
+            SaleConceptsTableSeeder::class,
         ]);
     }
 }
