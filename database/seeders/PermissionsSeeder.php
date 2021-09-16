@@ -25,6 +25,7 @@ class PermissionsSeeder extends Seeder
             ProductCategoriesModulePermissionsSeeder::class,
             ProductsModulePermissionsSeeder::class,
             SuppliersModulePermissionsSeeder::class,
+            TributesModulePermissionsSeeder::class,
         ]);
     }
 }

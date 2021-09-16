@@ -31,6 +31,8 @@ class DatabaseSeeder extends Seeder
             ProductsTableSeeder::class,
             AccountingRecordTypesTableSeeder::class,
             SuppliersTableSeeder::class,
+            TributesTableSeeder::class,
+            TributeAliquotsTableSeeder::class,
         ]);
     }
 }

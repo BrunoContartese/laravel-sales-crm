@@ -1,0 +1,24 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+
+class {{ class }} extends FormRequest
+{
+    public function authorize()
+    {
+        return Auth::user()->can('permission.create');
+    }
+
+    public function rules()
+    {
+        return Model::$rules;
+    }
+
+    public function messages()
+    {
+        return Model::$messages;
+    }
+}
