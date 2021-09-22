@@ -18,6 +18,10 @@ class TributeAliquotsService
             $tributeAliquots->where('name', 'LIKE', "%{$request->q}%");
         }
 
+        if( $request->has('tribute_id') ) {
+            $tributeAliquots->where('tribute_id', $request->tribute_id);
+        }
+
         if($request->has('status') && $request->status == '*') {
             $tributeAliquots->withTrashed();
         } else if ($request->has('status') && $request->status == 2) {
@@ -37,6 +41,10 @@ class TributeAliquotsService
 
         if( $request->has('q') ) {
             $tributeAliquots->where('name', 'LIKE', "%{$request->q}%");
+        }
+
+        if( $request->has('tribute_id') ) {
+            $tributeAliquots->where('tribute_id', $request->tribute_id);
         }
 
         if($request->has('status') && $request->status == '*') {
